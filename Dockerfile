@@ -9,6 +9,6 @@ COPY . .
 
 EXPOSE 5000
 
-ENV FLASK_APP=app.py
+ENV FLASK_APP=main.py
 
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
