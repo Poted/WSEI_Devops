@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-service
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30007
+  selector:
+    app: web-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web-app
+        image: python-devops:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ENV
+          value: "k8s-docker-desktop"
