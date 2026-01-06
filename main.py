@@ -1,0 +1,23 @@
+from flask import Flask, jsonify
+import datetime
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return jsonify({
+        "status": "running",
+        "service": "devops-project-app",
+        "timestamp": str(datetime.datetime.now())
+    })
+
+@app.route('/info')
+def info():
+    return jsonify({
+        "author": "Student",
+        "environment": os.environ.get("ENV", "development")
+    })
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
